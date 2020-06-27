@@ -21,8 +21,8 @@ class MoviesSpider(scrapy.Spider):
         for movie in movies:
             # span 取class方法 [contains(@class,"name")]
             title = movie.xpath('.//span[contains(@class,"name")]/text()').extract_first()
-            # print('-----------')
-            # print(title)
+            print('-----------')
+            print(title)
             # print(title.extract())
             # print(title.extract_first())
             # print('-----------')
@@ -37,9 +37,15 @@ class MoviesSpider(scrapy.Spider):
             # print((hover_tags.extract())[5].strip())
             types = (hover_tags.extract())[1].strip()
             dates = (hover_tags.extract())[5].strip()
-            # print(types)
-            # print(dates)
-            # print('-----------')
+            print(types)
+            print(dates)
+            print('-----------')
+
+            item = SpidersItem()
+            item['title'] = title
+            item['types'] = types
+            item['dates'] = dates
+            yield item
 
             movie_count += 1
             if movie_count > 9:
