@@ -12,7 +12,7 @@ class SpidersPipeline:
         types = item['types']
         dates = item['dates']
         # output = f'|{title}|\t|{types}|\t|{dates}|\n\n'
-        output = f'|{title}|\t|{types}|\t|{dates}|\n'
+        output = f'{title},{types},{dates}\n'
         with open('./movie.csv', 'a+', encoding='utf-8') as article:
             article.write(output)
         return item 
