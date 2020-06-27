@@ -24,7 +24,7 @@ mylist = []
 movie_count = 0
 
 # Python 中使用 for in 形式的循环,Python使用缩进来做语句块分隔
-for tags in bs_info.find_all('div', attrs={'class': 'movie-item film-channel'}):
+for tags in bs_info.find_all('div', attrs={'class': 'movie-hover-info'}):
     # for atag in tags.find_all('div', attrs={'class': 'movie-item-hover'}):
     #     for btag in atag.find_all('a'):
     #         for ctag in btag.find_all('div', attrs={'class': 'movie-hover-info'}):
