@@ -7,6 +7,10 @@
 import pymysql
 
 class SpidersPipeline:
+    # 测试 ip proxy
+    # def process_item(self, item, spider):
+    #     return item
+
     def process_item(self, item, spider):
         title = item['title']
         link = item['link']

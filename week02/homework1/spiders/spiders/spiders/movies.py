@@ -5,6 +5,14 @@ from scrapy.selector import Selector
 import pymysql
 
 class MoviesSpider(scrapy.Spider):
+    # 测试 ip proxy
+    # name = 'movies'
+    # allowed_domains = ['httpbin.org']
+    # start_urls = ['http://httpbin.org/ip']
+
+    # def parse(self, response):
+    #     print(response.text)
+
     name = 'movies'
     allowed_domains = ['movie.douban.com']
     start_urls = ['https://movie.douban.com/top250']
@@ -15,7 +23,7 @@ class MoviesSpider(scrapy.Spider):
             yield scrapy.Request(url=url, callback=self.parse, dont_filter=False)
 
     def parse(self, response):
-        print(response.url)
+        # print(response.url)
         movies = Selector(response=response).xpath('//div[@class="hd"]')
         for movie in movies:
             titles = movie.xpath('./a/span/text()')
