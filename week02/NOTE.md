@@ -52,3 +52,42 @@ pretty_errors 模块对异常的输出进行美化
 
 1. 带 http 头信息：如 User-Agent、Referer 等（搜索浏览器 Header 大全）
 2. 带cookies（包含加密的用户名、密码验证信息）
+
+## 验证码识别
+
+```bash
+# 先安装依赖库libpng, jpeg, libtiff, leptonica
+brew install leptonica
+sudo pacman -S leptonica
+# leptonica: Image processing and image analysis library
+# Required: giflib ✔, jpeg ✔, libpng ✔, libtiff ✔, openjpeg ✔, webp ✔
+
+# 安装tesseract
+brew install tesseract
+sudo pacman -S tesseract
+# tesseract: OCR (Optical Character Recognition) engine
+# Required: leptonica ✔, libtiff ✔
+
+# 与python对接需要安装的包
+pip3 install Pillow # Python Imaging Library
+pip3 install pytesseract # Python-tesseract is a python wrapper for Google's Tesseract-OCR
+```
+
+> 调用 C++ 的库来识别图形验证码
+
+## 中间件
+
+下载中间件可将设置项设置为 None，来关闭选项
+```python
+DOWNLOADER_MIDDLEWARES = {
+    'proxyspider.middlewares.ProxyspiderDownloaderMiddleware': 543,
+    'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': None,
+    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': 400,
+}
+```
+
+编写下载中间件四个主要方法：
+* process_request(request, spider) 优先级高的先调用
+* process_response(request, response, spider) 优先级高的后调用
+* process_exception(request, exception, spider) exception 和 request 抛出异常时会被调用
+* from_crawler(cls, crawler) 使用 crawler 创建中间件对象，并（必须）返回一个中间件对象
